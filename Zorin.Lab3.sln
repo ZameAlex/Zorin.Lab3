@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matrix", "Matrix\Matrix.csproj", "{6AB33B16-8821-4266-895F-39D324FEF460}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3\Lab3.csproj", "{231F3E1F-8A62-4ACA-AE54-3E91C7919CBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6AB33B16-8821-4266-895F-39D324FEF460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB33B16-8821-4266-895F-39D324FEF460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB33B16-8821-4266-895F-39D324FEF460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231F3E1F-8A62-4ACA-AE54-3E91C7919CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231F3E1F-8A62-4ACA-AE54-3E91C7919CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231F3E1F-8A62-4ACA-AE54-3E91C7919CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231F3E1F-8A62-4ACA-AE54-3E91C7919CBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
