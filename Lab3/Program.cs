@@ -22,7 +22,7 @@ namespace Lab3
 			Vector elements = new Vector (
 				new double[] 
 				{ 106, 279, 111, -99 });
-			DirectIteration ge = new DirectIteration(4);
+			DirectIteration ge = new DirectIteration(4,-5);
 			var result = ge.FindSolution(matrix, elements);
 			for (int row = 0; row < matrix.Count; row++)
 			{
