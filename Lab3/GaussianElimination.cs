@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-	class GaussianElimination : BaseMethod
+	internal class GaussianElimination : BaseMethod
 	{
 
 		public GaussianElimination(int count) : base(count)
@@ -19,11 +19,11 @@ namespace Lab3
 			//Direct elimination
 			var matrix = new SquareMatrix(inputMatrix);
 			var elements = new Vector(inputElements);
-			for (int row = 0; row < Count-1; row++)
+			for (var row = 0; row < Count-1; row++)
 			{
 				elements[row] /= matrix[row, row];
 				matrix[row] /= matrix[row, row];
-				for (int underMain = row+1; underMain < Count; underMain++)
+				for (var underMain = row+1; underMain < Count; underMain++)
 				{
 					elements[underMain] -= elements[row] * matrix[underMain, row];
 					matrix[underMain] -= matrix[row] * matrix[underMain, row];
@@ -33,9 +33,9 @@ namespace Lab3
 			matrix[Count - 1] /= matrix[Count - 1, Count - 1];
 
 			//Backward substitution
-			for (int row = Count - 2; row >= 0; row--)
+			for (var row = Count - 2; row >= 0; row--)
 			{
-				for (int column = row+1; column < Count; column++)
+				for (var column = row+1; column < Count; column++)
 				{
 					elements[row] = elements[row] - elements[column] * matrix[row, column];
 				}

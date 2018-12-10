@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
-			SquareMatrix matrix = new SquareMatrix(
+			var matrix = new SquareMatrix(
 				new double[,]
 				{
 					{23, -2, -11, 6 },
@@ -19,15 +19,15 @@ namespace Lab3
 					{9, 1, 14, 3 },
 					{-3, -2, 0, -16 }
 				});
-			Vector elements = new Vector (
+			var elements = new Vector (
 				new double[] 
 				{ 106, 279, 111, -99 });
-			DirectIteration ge = new DirectIteration(4,-5);
+			var ge = new DirectIteration(4,-5);
 			var result = ge.FindSolution(matrix, elements);
-			for (int row = 0; row < matrix.Count; row++)
+			for (var row = 0; row < matrix.Count; row++)
 			{
 				double temp=0;
-				for (int column = 0; column < matrix.Count; column++)
+				for (var column = 0; column < matrix.Count; column++)
 				{
 					temp += matrix[row, column] * result[column];
 				}

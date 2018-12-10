@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Matrix
 {
-	class ReverseMatrixNotExistsException:ApplicationException
+	internal class ReverseMatrixNotExistsException:ApplicationException
 	{
 		public ReverseMatrixNotExistsException():base("Matrix has no reverse!")
 		{

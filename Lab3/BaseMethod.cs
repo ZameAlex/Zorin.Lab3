@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-	abstract class BaseMethod
+	internal abstract class BaseMethod
 	{
 		public int Count { get; protected set; }
 
-		public BaseMethod(int count)
+		protected BaseMethod(int count)
 		{
 			Count = count;
 		}

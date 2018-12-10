@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using static System.Math;
 
 namespace Matrix
 {
@@ -47,12 +48,32 @@ namespace Matrix
 
 
 		#region AdditionalMethods
+
+		public double M_Norm()
+		{
+			var max = 0d;
+			for (var row = 0; row < Count; row++)
+			{
+				var tmp = 0d;
+				for (var column = 0; column < Count; column++)
+				{
+					if (row != column)
+						tmp += MatrixElements[row, column] / MatrixElements[row, row];
+				}
+
+				if (Abs(tmp) > max)
+					max = Abs(tmp);
+			}
+
+			return max;
+		}
+
 		public void RandomInitialization(int min, int max)
 		{
-			Random randomizer = new Random((int)DateTime.Now.Ticks);
-			for (int row = 0; row < Count; row++)
+			var randomizer = new Random((int)DateTime.Now.Ticks);
+			for (var row = 0; row < Count; row++)
 			{
-				for (int column = 0; column < Count; column++)
+				for (var column = 0; column < Count; column++)
 				{
 					MatrixElements[row, column] = randomizer.Next(min, max);
 				}
@@ -61,8 +82,8 @@ namespace Matrix
 
 		public void Transpone()
 		{
-			for (int row = 0; row < Count; row++)
-				for (int column = row + 1; column < Count; column++)
+			for (var row = 0; row < Count; row++)
+				for (var column = row + 1; column < Count; column++)
 				{
 					var temp = this.MatrixElements[row, column];
 					this.MatrixElements[row, column] = this.MatrixElements[column, row];
@@ -82,15 +103,15 @@ namespace Matrix
 		}
 
 		public double this[int row, int column] {
-			get { return MatrixElements[row, column]; }
-			set { MatrixElements[row, column] = value; }
+			get => MatrixElements[row, column];
+			set => MatrixElements[row, column] = value;
 		}
 		public Vector this[int row]
 		{
-			get { return new Vector(GetRow(row)); }
+			get => new Vector(GetRow(row));
 			set
 			{
-				for (int element = 0; element < value.Count; element++)
+				for (var element = 0; element < value.Count; element++)
 				{
 					MatrixElements[row, element] = value[element];
 				}
@@ -107,7 +128,7 @@ namespace Matrix
 		private double[] GetRow(int row)
 		{
 			var array = new double[Count];
-			for (int i = 0; i < Count; ++i)
+			for (var i = 0; i < Count; ++i)
 				array[i] = MatrixElements[row, i];
 			return array;
 		}
@@ -116,12 +137,12 @@ namespace Matrix
 		{
 			Determinant = 0;
 			if (this.AdditionalMatrix == null)
-				for (int column = 0; column < Count; column++)
+				for (var column = 0; column < Count; column++)
 				{
 					Determinant += this[0, column] * this.FindAlgerbricAddition(0, column);
 				}
 			else
-				for (int column = 0; column < Count; column++)
+				for (var column = 0; column < Count; column++)
 				{
 					Determinant += this[0, column] * this.AdditionalMatrix[0, column];
 				}
@@ -135,7 +156,7 @@ namespace Matrix
 			if ((row + column) % 2 == 0)
 				power = 1;
 			var tempAddForRow = 0;
-			for (int _row = 0; _row < Count; _row++)
+			for (var _row = 0; _row < Count; _row++)
 			{
 				if (row == _row)
 				{
@@ -143,7 +164,7 @@ namespace Matrix
 					continue;
 				}
 				var tempAddForColumn = 0;
-				for (int _column = 0; _column < Count; _column++)
+				for (var _column = 0; _column < Count; _column++)
 				{
 					if (column == _column)
 					{
@@ -161,9 +182,9 @@ namespace Matrix
 		private void FindAdditionalMatrix()
 		{
 			var resultMatrixElements = new double[Count, Count];
-			for (int row = 0; row < Count; row++)
+			for (var row = 0; row < Count; row++)
 			{
-				for (int column = 0; column < Count; column++)
+				for (var column = 0; column < Count; column++)
 					resultMatrixElements[row, column] = FindAlgerbricAddition(row, column);
 			}
 			AdditionalMatrix = new SquareMatrix(resultMatrixElements);
@@ -176,8 +197,7 @@ namespace Matrix
 				x = 0; y = 1;
 				return b;
 			}
-			double x1, y1;
-			double d = ExtendedEuclideanAlgorithm(b % a, a, out x1, out y1);
+			var d = ExtendedEuclideanAlgorithm(b % a, a, out var x1, out var y1);
 			x = y1 - (b / a) * x1;
 			y = x1;
 			return d;
@@ -186,13 +206,14 @@ namespace Matrix
 		private double FindReverseDeterminant(int module)
 		{
 			double x, y;
-			double g = ExtendedEuclideanAlgorithm(Determinant, module, out x, out y);
+			var g = ExtendedEuclideanAlgorithm(Determinant, module, out x, out y);
 			if (g == 1)
 				x = (x % module + module) % module;
 			else
 				throw new ReverseMatrixNotExistsException();
 			return x;
 		}
+
 
 		#endregion PrivateMethods
 
@@ -201,9 +222,9 @@ namespace Matrix
 		{
 			var length = first.Count;
 			var resultMatrixElements = new double[length, length];
-			for (int row = 0; row < length; row++)
+			for (var row = 0; row < length; row++)
 			{
-				for (int column = 0; column < length; column++)
+				for (var column = 0; column < length; column++)
 					resultMatrixElements[row, column] = first[row, column] + second[row, column];
 			}
 			return new SquareMatrix(resultMatrixElements);
@@ -212,9 +233,9 @@ namespace Matrix
 		public static SquareMatrix operator /(SquareMatrix target, double diviser)
 		{
 			var resultMatrixElements = new double[target.Count, target.Count];
-			for (int row = 0; row < target.Count; row++)
+			for (var row = 0; row < target.Count; row++)
 			{
-				for (int column = 0; column < target.Count; column++)
+				for (var column = 0; column < target.Count; column++)
 					resultMatrixElements[row, column] = target[row, column] / diviser;
 			}
 			return new SquareMatrix(resultMatrixElements);
@@ -223,9 +244,9 @@ namespace Matrix
 		public static SquareMatrix operator *(SquareMatrix target, double multiplexor)
 		{
 			var resultMatrixElements = new double[target.Count, target.Count];
-			for (int row = 0; row < target.Count; row++)
+			for (var row = 0; row < target.Count; row++)
 			{
-				for (int column = 0; column < target.Count; column++)
+				for (var column = 0; column < target.Count; column++)
 					resultMatrixElements[row, column] = target[row, column] * multiplexor;
 			}
 			return new SquareMatrix(resultMatrixElements);
@@ -236,10 +257,10 @@ namespace Matrix
 			if (vector.Count != matrix.Count)
 				throw new ArgumentException("Vector count and matrix count are not equals!");
 			var resultVectorElements = new double[vector.Count];
-			for (int row = 0; row < vector.Count; row++)
+			for (var row = 0; row < vector.Count; row++)
 			{
 				var temp = 0d;
-				for (int column = 0; column < matrix.Count; column++)
+				for (var column = 0; column < matrix.Count; column++)
 				{
 					temp += matrix[row, column] * vector[column];
 				}
@@ -254,12 +275,12 @@ namespace Matrix
 			if (first.Count != second.Count)
 				throw new ArgumentException("Matrixes count are not equals!");
 			var resultMatrixElements = new double[first.Count, second.Count];
-			for (int firstrow = 0; firstrow < first.Count; firstrow++)
+			for (var firstrow = 0; firstrow < first.Count; firstrow++)
 			{
 				var temp = 0d;
-				for (int column = 0; column < first.Count; column++)
+				for (var column = 0; column < first.Count; column++)
 				{
-					for (int secondrow = 0; secondrow < second.Count; secondrow++)
+					for (var secondrow = 0; secondrow < second.Count; secondrow++)
 					{
 						temp += first[firstrow, secondrow] * second[secondrow, column];
 					}
@@ -272,10 +293,10 @@ namespace Matrix
 		#endregion OverloadOperations
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder();
-			for (int row = 0; row < Count; row++)
+			var sb = new StringBuilder();
+			for (var row = 0; row < Count; row++)
 			{
-				for (int column = 0; column < Count; column++)
+				for (var column = 0; column < Count; column++)
 				{
 					sb.Append(MatrixElements[row, column]);
 					sb.Append(' ');

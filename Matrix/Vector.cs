@@ -42,8 +42,8 @@ namespace Matrix
 		#region AdditionalMethods
 		public double this[int number]
 		{
-			get { return VectorElements[number]; }
-			set { VectorElements[number] = value; }
+			get => VectorElements[number];
+			set => VectorElements[number] = value;
 		}
 		#endregion AdditionalMethods
 
@@ -52,7 +52,7 @@ namespace Matrix
 		public static Vector operator *(Vector target, double multiplexor)
 		{
 			var resultVectorElements = new double[target.Count];
-			for (int count = 0; count < target.Count; count++)
+			for (var count = 0; count < target.Count; count++)
 			{
 				resultVectorElements[count] = target[count] * multiplexor;
 			}
@@ -64,10 +64,10 @@ namespace Matrix
 			if (vector.Count != matrix.Count)
 				throw new ArgumentException("Vector count and matrix count are not equals!");
 			var resultVectorElements = new double[vector.Count];
-			for (int row = 0; row < vector.Count; row++)
+			for (var row = 0; row < vector.Count; row++)
 			{
 				var temp = 0d;
-				for (int column = 0; column < matrix.Count; column++)
+				for (var column = 0; column < matrix.Count; column++)
 				{
 					temp += vector[row] * matrix[column, row];
 				}
@@ -80,7 +80,7 @@ namespace Matrix
 		public static Vector operator +(Vector target, Vector vector)
 		{
 			var resultVectorElements = new double[target.Count];
-			for (int element = 0; element < target.Count; element++)
+			for (var element = 0; element < target.Count; element++)
 			{
 				resultVectorElements[element] = target[element] + vector[element];
 			}
@@ -90,7 +90,7 @@ namespace Matrix
 		public static Vector operator -(Vector target, Vector vector)
 		{
 			var resultVectorElements = new double[target.Count];
-			for (int element = 0; element < target.Count; element++)
+			for (var element = 0; element < target.Count; element++)
 			{
 				resultVectorElements[element] = target[element] - vector[element];
 			}
@@ -100,7 +100,7 @@ namespace Matrix
 		public static Vector operator /(Vector target, double diviser)
 		{
 			var resultVectorElements = new double[target.Count];
-			for (int element = 0; element < target.Count; element++)
+			for (var element = 0; element < target.Count; element++)
 			{
 				resultVectorElements[element] = target[element] / diviser;
 			}
@@ -111,7 +111,7 @@ namespace Matrix
 
 		public override string ToString()
 		{
-			StringBuilder sb = new StringBuilder();
+			var sb = new StringBuilder();
 			foreach (var item in VectorElements)
 			{
 				sb.Append(item);
